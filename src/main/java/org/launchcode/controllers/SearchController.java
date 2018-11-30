@@ -20,6 +20,8 @@ public class SearchController {
     @RequestMapping(value = "")
     public String search(Model model) {
         model.addAttribute("columns", ListController.columnChoices);
+        /* Set default choice to "all" */
+        model.addAttribute("lastChoiceKey", "all");
         return "search";
     }
 
@@ -37,6 +39,7 @@ public class SearchController {
         // set up the output page
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("lastChoiceKey", searchType);
         return "search";
     }
 }

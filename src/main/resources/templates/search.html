@@ -20,7 +20,7 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${lastChoiceKey == column.key}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -45,7 +45,10 @@
                 <tbody>
                     <tr th:each="detail : ${job}">
                         <td th:text="${#strings.capitalizeWords(detail.key)}"></td>
-                        <td th:text="${detail.value}"></td>
+                        <td>
+                            <span th:if="${detail.key == 'name'}" th:text="${detail.value}"></span>
+                            <a th:if="${detail.key != 'name'}" th:href="@{/list/jobs(column=${detail.key},value=${detail.value})}" th:text="${detail.value}"></a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
